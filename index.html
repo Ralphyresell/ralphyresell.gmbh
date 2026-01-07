@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>reselling.ralph | Ralph Lauren Reselling</title>
+  <meta name="description" content="Original Ralph Lauren Pieces. Verkauf über WhatsApp, Vinted & Instagram. Drops, Bundles, Quick Deals.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --cream:#f4efe6;
+      --muted:rgba(244,239,230,.75);
+      --gold:#c8a45d;
+      --stroke:rgba(255,255,255,.12);
+      --card:rgba(255,255,255,.03);
+      --radius:18px;
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:Inter,system-ui; background:var(--bg); color:var(--cream); }
+    a{ color:inherit; text-decoration:none }
+    .container{ max-width:1120px; margin:auto; padding:40px 20px; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(11,11,12,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      max-width:1120px; margin:auto;
+      padding:12px 20px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+      font-size:12px;
+    }
+    .brand small{
+      display:block;
+      letter-spacing:0;
+      text-transform:none;
+      color:rgba(244,239,230,.65);
+      font-weight:600;
+      font-size:12px;
+      margin-top:2px;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:12px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.03);
+      color:var(--gold);
+      font-family:"Playfair Display",serif;
+      font-size:16px;
+    }
+    .navBtns{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.03);
+      font-weight:600;
+      font-size:13px;
+      gap:10px;
+      cursor:pointer;
+      transition:.15s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.25); }
+    .btn.primary{
+      background: var(--gold);
+      color:#0b0b0c;
+      border:none;
+    }
+    .btn.ghost{ background: rgba(255,255,255,.02); }
+    .btn.disabled{
+      opacity:.55;
+      pointer-events:none;
+      transform:none;
+      background: rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.10);
+      color: var(--cream);
+    }
+
+    /* Hero */
+    header{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:26px;
+      align-items:center;
+      margin-top:18px;
+    }
+    @media(max-width:900px){ header{ grid-template-columns:1fr; } }
+    .kicker{ color:var(--muted); font-weight:600; font-size:13px; letter-spacing:.02em; }
+    h1{
+      font-family:"Playfair Display",serif;
+      font-size:50px;
+      line-height:1.03;
+      margin:10px 0 10px;
+      letter-spacing:-0.02em;
+    }
+    p{ color:var(--muted); line-height:1.65; margin:0; }
+    .heroActions{ margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; }
+
+    .hero-img{
+      height:340px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(0deg, rgba(11,11,12,.75), rgba(11,11,12,.10)),
+        url("https://images.unsplash.com/photo-1520975661595-6453be3f7070?auto=format&fit=crop&w=1400&q=80") center/cover;
+      overflow:hidden;
+    }
+
+    /* Sections */
+    section{ margin-top:70px; }
+    h2{
+      font-family:"Playfair Display",serif;
+      font-size:32px;
+      margin:0 0 10px;
+    }
+    .sub{ color:var(--muted); margin:0 0 18px; }
+
+    /* Cards */
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+    }
+    @media(max-width:900px){ .grid3{ grid-template-columns:1fr; } }
+
+    .card{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: var(--card);
+      overflow:hidden;
+    }
+
+    /* Products */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    @media(max-width:900px){ .products{ grid-template-columns:1fr; } }
+
+    .productImg{
+      position:relative;
+      height:210px;
+      background: rgba(255,255,255,.03);
+    }
+    .productImg img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .badgeRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .badge{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      font-size:12px;
+      color:rgba(244,239,230,.9);
+      background: rgba(255,255,255,.02);
+    }
+    .body{ padding:16px; }
+    .title{ font-weight:800; font-size:14px; letter-spacing:.01em; }
+    .price{ margin-top:10px; color:rgba(244,239,230,.9); font-size:13px; }
+    .price b{ color:var(--gold); font-weight:800; }
+    .ctaRow{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+
+    /* Sold badge */
+    .soldTag{
+      position:absolute;
+      left:12px; top:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(11,11,12,.75);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:900;
+      letter-spacing:.04em;
+      font-size:12px;
+      text-transform:uppercase;
+    }
+    .soldTag span{ color:#ff7b7b; }
+
+    /* Bundle */
+    .bundleHead{
+      display:flex; justify-content:space-between; gap:12px; align-items:flex-end;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .bundlePrice{
+      font-size:13px; color:rgba(244,239,230,.9);
+    }
+    .bundlePrice b{ color:var(--gold); font-weight:900; }
+    ul.clean{
+      margin:10px 0 0 18px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:80px;
+      padding:28px 20px;
+      border-top:1px solid rgba(255,255,255,.08);
+      font-size:12px;
+      color:rgba(244,239,230,.55);
+      text-align:center;
+    }
+
+    /* Floating WhatsApp */
+    .float{
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      background:#25d366;
+      color:#0b0b0c;
+      padding:14px 18px;
+      border-radius:999px;
+      font-weight:900;
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      z-index:60;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+  // ✅ Deine Links (schon eingetragen)
+  const WHATSAPP = "4915121613183";          // ohne +
+  const INSTAGRAM = "reselling.ralph";       // username
+  const VINTED = "https://www.vinted.de/member/silas_la_carp";
+
+  function wa(msg){
+    return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+  }
+
+  // ✅ PRODUKTE (hier pflegst du alles)
+  // sold: true -> Sold Out Badge + Button disabled + Bundles werden automatisch deaktiviert
+  const PRODUCTS = [
+    {
+      id: "qz-navy-m",
+      name: "Quarter Zip Navy",
+      size: "M",
+      condition: "9/10",
+      price: 79,
+      img: "https://images.unsplash.com/photo-1520975682031-a51fd7b5c3f6?auto=format&fit=crop&w=1400&q=80",
+      sold: false
+    },
+    {
+      id: "sweater-cream-l",
+      name: "Sweater Cream",
+      size: "L",
+      condition: "8/10",
+      price: 69,
+      img: "https://images.unsplash.com/photo-1520975757481-6903f3a0d8c5?auto=format&fit=crop&w=1400&q=80",
+      sold: true
+    },
+    {
+      id: "polo-black-s",
+      name: "Polo Black",
+      size: "S",
+      condition: "9/10",
+      price: 39,
+      img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1400&q=80",
+      sold: false
+    }
+  ];
+
+  // ✅ BUNDLES (Auto Disable, wenn required Items sold sind)
+  const BUNDLES = [
+    {
+      title: "QUICK DEAL 1 · „Clean Starter“",
+      required: ["polo-black-s", "qz-navy-m"],
+      items: ["Polo + Quarter Zip", "Clean Starter Combo"],
+      price: 109,
+      msg: "Hey, ich will QUICK DEAL 1 (Polo + Quarter Zip) kaufen. Was ist noch verfügbar?"
+    },
+    {
+      title: "QUICK DEAL 2 · „Locker & Clean“",
+      required: ["qz-navy-m"],
+      items: ["Quarter Zip + Sneaker", "Locker, stabil, alltagstauglich"],
+      price: 95,
+      msg: "Hey, ich will QUICK DEAL 2 anfragen. Was genau ist noch da?"
+    },
+    {
+      title: "QUICK DEAL 3 · „Winter Combo“",
+      required: ["sweater-cream-l", "qz-navy-m"],
+      items: ["Sweater + Quarter Zip", "Warm & clean"],
+      price: 129,
+      msg: "Hey, ich will QUICK DEAL 3 (Sweater + Quarter Zip) kaufen. Hast du Maße?"
+    }
+  ];
+</script>
+
+<div class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">RL</div>
+      <div>
+        reselling.ralph
+        <small>Ralph Lauren Reselling</small>
+      </div>
+    </div>
+
+    <div class="navBtns">
+      <a class="btn primary" href="#products">Drops</a>
+      <a class="btn" id="btnWA" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn" id="btnVinted" target="_blank" rel="noopener">Vinted</a>
+      <a class="btn ghost" id="btnIG" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <header id="top">
+    <div>
+      <div class="kicker">Originalware · Drops · Bundles · Quick Deals</div>
+      <h1>Clean Pieces.<br>Direkt kaufen.</h1>
+      <p>
+        Ausgewählte originale Ralph-Lauren Teile. Zustand ehrlich, Fotos real.
+        Kauf über WhatsApp oder Vinted. Instagram ist für Drops & Updates.
+      </p>
+
+      <div class="heroActions">
+        <a class="btn primary" href="#products">Aktuelle Pieces</a>
+        <a class="btn" id="heroWA" target="_blank" rel="noopener">Sofort anfragen</a>
+        <a class="btn ghost" href="#bundles">Bundles checken</a>
+      </div>
+
+      <p style="margin-top:14px; font-size:12px;">
+        <span style="color:rgba(244,239,230,.55);">
+          Unabhängiger Reseller. Keine Verbindung zu Ralph Lauren. Marken gehören ihren Inhabern.
+        </span>
+      </p>
+    </div>
+
+    <div class="hero-img" aria-label="Hero image"></div>
+  </header>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <h2>Aktuelle Pieces</h2>
+    <p class="sub">
+      Wenn ein Teil weg ist: oben im Code beim Produkt <b>sold: true</b> setzen. Dann ist es automatisch Sold Out.
+    </p>
+
+    <div class="products" id="productGrid"></div>
+  </section>
+
+  <!-- BUNDLES -->
+  <section id="bundles">
+    <h2>Bundles (Quick Deals)</h2>
+    <p class="sub">
+      Auto-Check: Wenn ein required Piece sold ist, wird das Bundle automatisch deaktiviert.
+    </p>
+
+    <div class="grid3" id="bundleGrid"></div>
+  </section>
+
+  <!-- BUY -->
+  <section id="buy">
+    <h2>Kaufen in 30 Sekunden</h2>
+    <p class="sub">
+      Wähle deinen Weg. Ich schicke dir auf Anfrage Maße, Zustand und Versand direkt.
+    </p>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="body">
+          <div class="title">WhatsApp (am schnellsten)</div>
+          <p style="margin-top:8px;">Verfügbarkeit, Bundle-Preis, Versand. Kurz klären, direkt raus.</p>
+          <div class="ctaRow">
+            <a class="btn primary" id="buyWA" target="_blank" rel="noopener">WhatsApp öffnen</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <div class="title">Vinted (mit Käuferschutz)</div>
+          <p style="margin-top:8px;">Wenn du lieber über Plattform kaufst: ich schicke dir den Link zum Piece.</p>
+          <div class="ctaRow">
+            <a class="btn primary" id="buyVinted" target="_blank" rel="noopener">Zu Vinted</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <div class="title">Instagram (Drops & Updates)</div>
+          <p style="margin-top:8px;">Neue Drops in der Story. Sold-Outs und Quick Deals kommen da zuerst.</p>
+          <div class="ctaRow">
+            <a class="btn primary" id="buyIG" target="_blank" rel="noopener">Instagram öffnen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<a class="float" id="waFloat" target="_blank" rel="noopener">WhatsApp</a>
+
+<footer>
+  Unabhängiger Reseller · Keine Verbindung zu Ralph Lauren · Alle Marken gehören ihren Inhabern
+</footer>
+
+<script>
+  // Nav / Hero Links
+  document.getElementById("btnWA").href = wa("Hey, ich komme von deiner Website. Welche Pieces sind gerade da?");
+  document.getElementById("heroWA").href = wa("Hey, ich komme von deiner Website. Ich will ein Piece anfragen.");
+  document.getElementById("btnVinted").href = VINTED;
+  document.getElementById("btnIG").href = "https://instagram.com/" + INSTAGRAM;
+
+  document.getElementById("buyWA").href = wa("Hey, ich will kaufen. Kannst du mir Verfügbarkeit + Versand schicken?");
+  document.getElementById("buyVinted").href = VINTED;
+  document.getElementById("buyIG").href = "https://instagram.com/" + INSTAGRAM;
+
+  document.getElementById("waFloat").href = wa("Hey, ich komme von der Website. Kurze Frage:");
+
+  // Render Products
+  const productGrid = document.getElementById("productGrid");
+  productGrid.innerHTML = PRODUCTS.map(p => {
+    const soldTag = p.sold ? `<div class="soldTag"><span>Sold Out</span></div>` : "";
+    const msg = `Ich will "${p.name}" (Größe ${p.size}) kaufen. Noch verfügbar?`;
+    const btnClass = p.sold ? "btn disabled" : "btn primary";
+    const btnText = p.sold ? "Sold Out" : "Anfragen";
+    const btnHref = p.sold ? "#" : wa(msg);
+
+    return `
+      <div class="card">
+        <div class="productImg">
+          ${soldTag}
+          <img src="${p.img}" alt="${p.name}">
+        </div>
+        <div class="body">
+          <div class="title">${p.name}</div>
+          <div class="badgeRow">
+            <span class="badge">Größe: ${p.size}</span>
+            <span class="badge">Zustand: ${p.condition}</span>
+            <span class="badge">ID: ${p.id}</span>
+          </div>
+          <div class="price">Preis: <b>${p.price}€</b></div>
+          <div class="ctaRow">
+            <a class="${btnClass}" href="${btnHref}" target="_blank" rel="noopener">${btnText}</a>
+            <a class="btn" href="${VINTED}" target="_blank" rel="noopener">Vinted</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Render Bundles (Auto Disable)
+  const soldIds = PRODUCTS.filter(p => p.sold).map(p => p.id);
+  const bundleGrid = document.getElementById("bundleGrid");
+
+  bundleGrid.innerHTML = BUNDLES.map(b => {
+    const unavailable = b.required.some(id => soldIds.includes(id));
+
+    const btnClass = unavailable ? "btn disabled" : "btn primary";
+    const btnText = unavailable ? "Teilweise sold" : "Bundle anfragen";
+    const btnHref = unavailable ? "#" : wa(b.msg);
+
+    const missingList = unavailable
+      ? b.required
+          .filter(id => soldIds.includes(id))
+          .map(id => `<span class="badge" style="border-color:rgba(255,123,123,.35); color:#ffb3b3;">${id} sold</span>`)
+          .join(" ")
+      : "";
+
+    return `
+      <div class="card">
+        <div class="body">
+          <div class="bundleHead">
+            <div class="title">${b.title}</div>
+            <div class="bundlePrice">Bundle: <b>${b.price}€</b></div>
+          </div>
+
+          <ul class="clean">
+            ${b.items.map(x => `<li>${x}</li>`).join("")}
+          </ul>
+
+          ${
+            unavailable
+              ? `<p style="color:#ff7b7b;font-size:13px;margin-top:12px;">
+                   Ein Teil dieses Bundles ist aktuell verkauft.
+                 </p>
+                 <div class="badgeRow" style="margin-top:10px;">${missingList}</div>`
+              : `<p style="color:rgba(244,239,230,.7);font-size:13px;margin-top:12px;">
+                   Alles verfügbar. First come, first serve.
+                 </p>`
+          }
+
+          <div class="ctaRow">
+            <a class="${btnClass}" href="${btnHref}" target="_blank" rel="noopener">${btnText}</a>
+            <a class="btn ghost" href="#products">Pieces ansehen</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+</script>
+
+</body>
+</html>
